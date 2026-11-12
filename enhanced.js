@@ -116,7 +116,7 @@ SOBRES.forEach(([t, m]) => {
 });
 
 /* extras de enhanced: subtítulos en los rincones y pantalla de inicio */
-['lo que me gusta de vos', 'una carta', 'abrí cuando…'].forEach((t, i) => document.querySelectorAll('.contenedor-botones-rincon .btn-rincon')[i].dataset.sub = t);
+['lo que me gusta de vos', 'una carta', 'playlist para vos', 'abrí cuando…'].forEach((t, i) => document.querySelectorAll('.contenedor-botones-rincon .btn-rincon')[i].dataset.sub = t);
 $('#pantalla-inicio').insertAdjacentHTML('afterbegin', '<div class="ini-titulo enh-only">Rare Sunset<small>PARA BELÉN</small></div>');
 
 /* detalles: tilt 3D en desktop + easter egg del π */
