@@ -177,3 +177,6 @@ body:not(.enhanced) .tema-por p::before{content:'> '}
 body.enhanced .item{border-radius:10px}
 body.enhanced .item.abierto{background:rgba(255,255,255,.03)}
 @media(max-width:600px){.vinilo{width:48px;height:48px}.tema-por p{margin-left:0}#lista-temas{max-height:44vh}}
+
+/* fix: la carta animada solo existe en enhanced (evita que se vea doble en retro) */
+body:not(.enhanced) #carta-enh{display:none!important}
