@@ -1,0 +1,416 @@
+/* ==========================================================================
+ *  PALETA FRÍA UNIFICADA DE SUS OJOS
+ *  ========================================================================== */
+:root {
+    --bocanada-fondo: #03050d;
+    --ojo-azul-oscuro: #2E3F42;
+    --ojo-verde-claro: #718B79;
+    --ojo-azul-petroleo: #3A4F52;
+    --ojo-verde-bosque: #4E6555;
+    --ojo-gris-azulado: #435B5E;
+}
+
+/* ==========================================================================
+ *  RESET RESPONSIVO BASE
+ *  ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    overflow-x: hidden;
+    background-color: var(--bocanada-fondo);
+    color: var(--ojo-verde-claro);
+}
+
+/* ==========================================================================
+ *  ESTRUCTURA DEL FONDO (Capas en Z-INDEX)
+ *  ========================================================================== */
+.fondo-pantalla {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(3, 5, 13, 0.6), rgba(3, 5, 13, 0.8)),
+    url('fondo bocanada.jpg') no-repeat center center/cover;
+    filter: blur(8px);
+    transform: scale(1.05);
+    z-index: 1;
+}
+
+.ondas-piscina-puras {
+    position: fixed;
+    top: -10%;
+    left: -25%;
+    width: 150%;
+    height: 120%;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(90deg,
+                                transparent 0%,
+                                rgba(113, 139, 121, 0.4) 20%,
+                                rgba(78, 101, 85, 0.5) 35%,
+                                transparent 50%,
+                                rgba(113, 139, 121, 0.45) 65%,
+                                transparent 80%,
+                                transparent 100%
+    );
+    background-size: 200% 100%;
+    filter: blur(50px);
+    mix-blend-mode: screen;
+    opacity: 0.75;
+    animation: aurorasFlotantes 20s ease-in-out infinite alternate;
+}
+
+.contenedor-fondo-total {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+/* ==========================================================================
+ *  REPRODUCTOR MINI
+ * ========================================================================== */
+.reproductor-mini {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 260px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--ojo-azul-oscuro);
+    border-radius: 16px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 15px rgba(46, 63, 66, 0.2);
+    z-index: 10;
+    animation: slideIn 0.4s ease-out;
+}
+
+#mini-portada {
+width: 45px;
+height: 45px;
+border-radius: 8px;
+object-fit: cover;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.mini-info {
+    flex: 1;
+    overflow: hidden;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+#mini-titulo {
+font-size: 0.9rem;
+font-weight: 600;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+color: var(--ojo-verde-claro);
+}
+
+#mini-artista {
+font-size: 0.75rem;
+color: var(--ojo-verde-claro);
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.btn-skip {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(113, 139, 121, 0.3);
+    color: var(--ojo-verde-claro);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn-skip:hover {
+    background: var(--ojo-azul-petroleo);
+    border-color: var(--ojo-gris-azulado);
+    box-shadow: 0 0 8px var(--ojo-azul-petroleo);
+}
+
+/* ==========================================================================
+ *  CONTENEDOR PRINCIPAL
+ * ========================================================================== */
+.interfaz-principal {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 60%, rgba(0, 0, 0, 0.2) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--ojo-verde-bosque);
+    border-radius: 20px;
+    padding: 45px 30px 35px 30px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 35px rgba(46, 63, 66, 0.12);
+    margin-top: 60px;
+    z-index: 5;
+}
+
+.interfaz-principal::before, .interfaz-principal::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 2px solid var(--ojo-verde-claro);
+    pointer-events: none;
+}
+.interfaz-principal::before { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+.interfaz-principal::after { top: 12px; right: 12px; border-left: none; border-bottom: none; }
+
+.micro-texto {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    color: var(--ojo-verde-claro);
+    position: absolute;
+    opacity: 0.8;
+}
+
+.meta-izq { top: 14px; left: 32px; }
+.meta-der { top: 14px; right: 32px; }
+.meta-inf {
+    bottom: 14px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.carta-contenido {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.carta-contenido.activo {
+    display: block;
+    opacity: 1;
+}
+
+.titulo-rincon {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--ojo-verde-claro);
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.parrafo-estetico {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--ojo-verde-claro);
+    font-style: italic;
+}
+
+/* ==========================================================================
+ *  BOTONES
+ * ========================================================================== */
+.contenedor-botones-rincon {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 25px 0 15px 0;
+}
+
+.btn-rincon {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--ojo-verde-claro);
+    color: var(--ojo-verde-claro);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn-rincon:hover {
+    background: rgba(113, 139, 121, 0.15);
+    border-color: var(--ojo-verde-claro);
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(113, 139, 121, 0.2);
+}
+
+.btn-volver {
+    display: inline-block;
+    background: transparent;
+    border: none;
+    color: var(--ojo-verde-claro);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: color 0.2s;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn-volver:hover {
+    color: #ffffff;
+}
+
+.separador-estetico {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--ojo-azul-petroleo), var(--ojo-verde-bosque), transparent);
+    margin: 30px 0;
+    opacity: 0.6;
+}
+
+.revelacion-mirada {
+    padding: 5px 0;
+}
+
+.frase-secreta {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: var(--ojo-verde-claro);
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.frase-revelacion {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--ojo-verde-claro);
+    text-shadow: 0 0 12px rgba(113, 139, 121, 0.35);
+}
+
+/* ==========================================================================
+ *  ANIMACIONES
+ * ========================================================================== */
+@keyframes aurorasFlotantes {
+    0% { transform: translateX(0) scale(1) skewX(-4deg); background-position: 0% 0%; }
+    50% { transform: translateX(-10%) scale(1.08) skewX(4deg); background-position: 100% 0%; }
+    100% { transform: translateX(0) scale(1) skewX(-4deg); background-position: 0% 0%; }
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+ *  MEDIA QUERIES (Móvil)
+ * ========================================================================== */
+@media (max-width: 600px) {
+    .reproductor-mini {
+        top: auto;
+        bottom: 20px;
+        right: 50%;
+        transform: translateX(50%);
+        width: 92%;
+        max-width: 340px;
+    }
+
+    .btn-skip {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+    }
+
+    .interfaz-principal {
+        margin-top: 0;
+        margin-bottom: 85px;
+        padding: 40px 20px 35px 20px;
+        border-radius: 16px;
+    }
+
+    .meta-izq, .meta-der { font-size: 0.6rem; letter-spacing: 1px; }
+
+    .contenedor-botones-rincon {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+/* ==========================================================================
+ *  FIRMA Y BOTÓN COLORES (Integrados al final)
+ * ========================================================================== */
+@keyframes brillo-firma {
+    0%, 100% { color: #A79E62; }
+    15% { color: #8F8751; }
+    30% { color: #7B7344; }
+    45% { color: #B6AC6D; }
+    60% { color: #6C663B; }
+    75% { color: #999057; }
+    90% { color: #847C4A; }
+}
+
+.firma-odyszea {
+    text-align: right;
+    font-size: 0.8rem;
+    margin: 5px 0 25px 0;
+    font-family: 'Share Tech Mono', monospace;
+    animation: brillo-firma 10s infinite linear;
+    display: block;
+    width: 100%;
+}
+
+.btn-rincon-colores {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--ojo-verde-claro);
+    color: var(--ojo-verde-claro);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    width: 100%;
+    text-transform: uppercase;
+}
+
+.btn-rincon-colores:hover {
+    background: var(--ojo-verde-bosque);
+    color: #ffffff;
+}
+
+#submenu-colores {
+margin-top: 20px;
+text-align: left;
+background: rgba(255, 255, 255, 0.03);
+padding: 15px;
+border-radius: 8px;
+border: 1px solid rgba(113, 139, 121, 0.3);
+}
+
+#submenu-colores ul {
+list-style: none;
+padding: 0;
+font-family: 'Share Tech Mono', monospace;
+font-size: 0.85rem;
+color: var(--ojo-verde-claro);
+}

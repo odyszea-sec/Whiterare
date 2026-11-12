@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rare Sunset</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilos_bocanada.css">
+    <link rel="stylesheet" href="enhanced.css">
+</head>
+<body>
+
+    <div id="pantalla-inicio" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #03050d; display: flex; justify-content: center; align-items: center; z-index: 9999;">
+        <button class="btn-rincon" onclick="iniciarExperiencia()" style="font-size: 1.5rem; padding: 20px 40px; cursor: pointer;">INICIAR</button>
+    </div>
+
+    <div class="fondo-pantalla"></div>
+    <div class="ondas-piscina-puras"></div>
+    <canvas id="lienzo"></canvas>
+    <div id="luz"></div>
+    <div id="transicion"><span></span></div>
+    <button id="btn-modo">VERSIÓN ENHANCED ✨</button>
+    <div id="toast"></div>
+
+    <div class="reproductor-mini">
+        <img id="mini-portada" src="portada bocanada.jpg" alt="Portada">
+        <div class="mini-info">
+            <div id="mini-titulo">Bocanada</div>
+            <div id="mini-artista">Gustavo Cerati</div>
+            <div class="barra enh-only" id="barra"><i id="barra-i"></i></div>
+        </div>
+        <div class="eq enh-only"><i></i><i></i><i></i><i></i></div>
+        <button class="btn-skip enh-only" id="btn-pp">⏸</button>
+        <button class="btn-skip" onclick="reproducirAleatorio()">🎲</button>
+        <audio id="reproductor-core"></audio>
+    </div>
+
+    <div class="interfaz-principal">
+        <div class="micro-texto meta-izq">ALBUM NO. 02 // BOCANADA</div>
+        <div class="micro-texto meta-der">TRACK LIST / RANDOM MODE</div>
+
+        <div id="seccion-principal" class="carta-contenido activo">
+            <h1 class="enh-only hero">Para Belén</h1>
+            <p class="parrafo-estetico">esto no es ni un 3.14% de mi amor.</p>
+            <div class="firma-odyszea">firma: odyszea-dev</div>
+
+            <div class="contenedor-botones-rincon">
+                <button class="btn-rincon" onclick="cambiarSeccion('rincon1')">Rincón 1</button>
+                <button class="btn-rincon" onclick="cambiarSeccion('rincon2')">Rincón 2</button>
+                <button class="btn-rincon" onclick="cambiarSeccion('rincon3')">Rincón 3</button>
+            </div>
+
+            <hr class="separador-estetico">
+
+            <div class="revelacion-mirada">
+                <p class="frase-secreta">Todos los tonos azules verdes y dorados/miel</p>
+                <p class="frase-revelacion">Son colores exactos extraídos de tus ojos. ✨</p>
+
+                <button class="btn-rincon-colores" onclick="toggleColores()">ver códigos de colores de tus ojos</button>
+
+                <div id="submenu-colores" style="display: none; margin-top: 20px; text-align: left; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 5px; font-family: 'Share Tech Mono', monospace; font-size: 0.8rem;">
+                    <p style="color: #718B79; margin-bottom: 10px; border-bottom: 1px solid rgba(113,139,121,0.3);">// TONOS VERDES</p>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 15px;">
+                        <li><span style="color: #718B79;">■</span> #718B79 - Verde salvia claro</li>
+                        <li><span style="color: #5E7766;">■</span> #5E7766 - Verde musgo medio</li>
+                        <li><span style="color: #4E6555;">■</span> #4E6555 - Verde bosque profundo</li>
+                        <li><span style="color: #829C8B;">■</span> #829C8B - Verde grisáceo con luz</li>
+                        <li><span style="color: #3D5043;">■</span> #3D5043 - Verde pino oscuro</li>
+                        <li><span style="color: #657F6D;">■</span> #657F6D - Verde seco</li>
+                        <li><span style="color: #566E5E;">■</span> #566E5E - Verde oliva desaturado</li>
+                    </ul>
+                    <p style="color: #3A4F52; margin-bottom: 10px; border-bottom: 1px solid rgba(58,79,82,0.3);">// TONOS AZULES</p>
+                    <ul style="list-style: none; padding: 0; margin-bottom: 15px;">
+                        <li><span style="color: #4C6568;">■</span> #4C6568 - Azul grisáceo medio</li>
+                        <li><span style="color: #3A4F52;">■</span> #3A4F52 - Azul petróleo oscuro</li>
+                        <li><span style="color: #5B7376;">■</span> #5B7376 - Celeste grisáceo opaco</li>
+                        <li><span style="color: #2E3F42;">■</span> #2E3F42 - Azul marino profundo</li>
+                        <li><span style="color: #435B5E;">■</span> #435B5E - Gris azulado frío</li>
+                        <li><span style="color: #678083;">■</span> #678083 - Azul transición</li>
+                        <li><span style="color: #334649;">■</span> #334649 - Azul pizarra oscuro</li>
+                    </ul>
+                    <p style="color: #A79E62; margin-bottom: 10px; border-bottom: 1px solid rgba(167,158,98,0.3);">// TONOS DORADOS Y MIEL</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><span style="color: #A79E62;">■</span> #A79E62 - Miel brillante</li>
+                        <li><span style="color: #8F8751;">■</span> #8F8751 - Verde oliva</li>
+                        <li><span style="color: #7B7344;">■</span> #7B7344 - Ocre / Avellana</li>
+                        <li><span style="color: #B6AC6D;">■</span> #B6AC6D - Dorado pálido</li>
+                        <li><span style="color: #6C663B;">■</span> #6C663B - Marrón verdoso</li>
+                        <li><span style="color: #999057;">■</span> #999057 - Mostaza suave</li>
+                        <li><span style="color: #847C4A;">■</span> #847C4A - Bronce translúcido</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="seccion-rincon1" class="carta-contenido">
+            <h3 class="titulo-rincon">Cosas que me gustan de vos</h3>
+            <div class="contenedor-frase-dinamica" style="margin: 30px 0;">
+                <p id="texto-frase-rincon" class="parrafo-estetico" style="text-align: center; min-height: 80px; font-size: 1.5rem;"></p>
+            </div>
+            <div style="text-align: center;">
+                <button class="btn-rincon" onclick="generarFraseRincon()">Ver otra 🎲</button>
+            </div>
+            <button class="btn-volver" style="display: block; margin: 20px auto;" onclick="cambiarSeccion('principal')">← Volver al Principal</button>
+        </div>
+
+        <div id="seccion-rincon2" class="carta-contenido">
+            <h2 class="titulo-rincon">Rincón 2</h2>
+            <p class="parrafo-estetico">
+                Hola, amore. Esta creo que es la primera vez que te escribo o te hago un detallito, y es porque, gracias a Dios, nunca me forzaste a nada y te lo agradezco con mi corazón entero porque sabes que no me apetece que me obliguen a nada. Me hubiese gustado darte una cartita hecha a mano con mi nueva supercaligrafía, pero estoy demasiado lejos y, como tengo tiempo de sobra y me acordé que soy un virgen que vive en la computadora, te hice esto. También siento que es la mejor manera de expresarte mi amor; no hay un detalle tan mío como algo programado. Espero te guste, le puse detallitos como lo del color de tus ojos; estuve como una hora sacando colores de una foto tuya que tengo KLJASHDLKAS.<br><br>
+                Cuestión, mi amore: te amo mucho, estoy ansioso de volver a verte, abrazarte, besarte, escuchar tu voz tan dulce. Amo todo de vos y lo sabes por el primer rincón. Tengo una abstinencia enorme de vos, te necesito como quien necesita el oxígeno o un cigarro para calmarse. Estoy lejos de casa, estoy lejos de vos; me duele la distancia, pero no es eterna, falta cada vez menos para que estés en mis brazos otra vez (parece que te moriste, lol).<br><br>
+                Ojalá no conozcas a nadie en lo que vuelvo, porque no me va a quedar otra que matarlo :3.....<br><br>
+                Extraño que te pares a abrazarme cada vez que voy a verte, extraño que me busques el cuello porque sabes que soy re sensible, extraño que me mires como una acosadora, extraño tanto cada mini acción y cada mini detalle tuyo, extraño tu olor, tu tacto, extraño todo. Te extraño.<br><br>
+                Espero estés bien, espero comas, espero crezcas algún centímetro más y espero que me sigas amando.<br><br>
+                Te amo, Belén.<br><br>
+                Firma: odyszea-sec
+            </p>
+            <button class="btn-volver" onclick="cambiarSeccion('principal')">← Volver al Principal</button>
+        </div>
+
+        <div id="seccion-rincon3" class="carta-contenido">
+            <h2 class="titulo-rincon">Abrí cuando…</h2>
+            <div id="sobres"></div>
+            <div id="carta-abierta" class="parrafo-estetico"></div>
+            <button class="btn-volver" onclick="cambiarSeccion('principal')">← Volver al Principal</button>
+        </div>
+
+        <div class="micro-texto meta-inf">TOTAL TIME: 44:11 / 73:00 // AUDIO Hi-Fi</div>
+    </div>
+
+    <script src="interacciones_bocanada.js"></script>
+    <script src="enhanced.js"></script>
+</body>
+</html>

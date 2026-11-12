@@ -1,0 +1,136 @@
+/* ===== VERSIÓN ENHANCED (todo scopeado a body.enhanced; sin la clase, se ve tu versión retro) ===== */
+.enh-only{display:none}
+body.enhanced .enh-only{display:block}
+body.enhanced .btn-skip.enh-only{display:flex}
+#btn-modo{position:fixed;left:16px;bottom:16px;z-index:50;background:rgba(3,5,13,.7);border:1px solid var(--ojo-verde-claro);color:var(--ojo-verde-claro);font:.7rem 'Share Tech Mono',monospace;letter-spacing:1px;padding:9px 14px;border-radius:999px;cursor:pointer;backdrop-filter:blur(10px);transition:.3s}
+#btn-modo:hover{background:var(--ojo-verde-bosque);color:#fff}
+#lienzo{position:fixed;inset:0;z-index:3;pointer-events:none;display:none}
+body.enhanced #lienzo{display:block}
+#toast{position:fixed;top:24px;left:50%;transform:translate(-50%,-20px);z-index:60;background:rgba(3,5,13,.85);border:1px solid var(--ojo-verde-claro);color:var(--ojo-verde-claro);font:.75rem 'Share Tech Mono',monospace;padding:10px 16px;border-radius:10px;opacity:0;transition:.4s;pointer-events:none;text-align:center;max-width:90%}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+
+body.enhanced .fondo-pantalla{animation:kenburns 40s ease-in-out infinite alternate}
+@keyframes kenburns{to{transform:scale(1.18) translate(-1.5%,1%)}}
+body.enhanced .interfaz-principal{max-width:480px;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .2s ease-out;border-color:rgba(113,139,121,.55);box-shadow:0 30px 70px rgba(0,0,0,.65),0 0 60px rgba(113,139,121,.14),inset 0 1px 0 rgba(255,255,255,.08)}
+body.enhanced .carta-contenido.activo{animation:subir .7s cubic-bezier(.2,.8,.2,1)}
+@keyframes subir{from{opacity:0;transform:translateY(14px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+body.enhanced .titulo-rincon,body.enhanced .frase-revelacion{text-shadow:0 0 14px rgba(113,139,121,.45)}
+body.enhanced #seccion-principal>.parrafo-estetico{font-size:1.4rem;cursor:pointer}
+body.enhanced .btn-rincon{transition:.3s}
+body.enhanced .btn-rincon:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(113,139,121,.25)}
+
+/* reproductor */
+.barra{height:4px;border-radius:4px;background:rgba(113,139,121,.2);margin-top:7px;cursor:pointer;overflow:hidden}
+.barra i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ojo-azul-petroleo),var(--ojo-verde-claro),#A79E62)}
+#mini-portada{transition:border-radius .6s}
+body.enhanced.sonando #mini-portada{border-radius:50%;animation:girar 14s linear infinite}
+@keyframes girar{to{transform:rotate(360deg)}}
+
+/* rincón 1 */
+.frase-in{animation:fraseIn .6s}
+@keyframes fraseIn{from{opacity:0;transform:translateY(8px);filter:blur(5px)}to{opacity:1;transform:none;filter:none}}
+#cont-frases{text-align:center;font:.65rem 'Share Tech Mono',monospace;letter-spacing:2px;opacity:.7;margin-top:12px}
+
+/* rincón 2 */
+body.enhanced #seccion-rincon2>p{display:none}
+#carta-enh{max-height:52vh;overflow-y:auto;padding-right:8px;scrollbar-width:thin;scrollbar-color:var(--ojo-verde-bosque) transparent}
+.enh-p{font:italic 1.05rem/1.65 'Cormorant Garamond',serif;margin-bottom:14px;opacity:0;animation:subir .9s forwards}
+
+/* paleta */
+body.enhanced #submenu-colores{display:none!important}
+#paleta-enh{display:none;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;margin-top:16px}
+#paleta-enh.abierta{display:grid;animation:subir .5s}
+.sw{border-radius:10px;height:62px;cursor:pointer;display:flex;align-items:flex-end;padding:6px;font:.62rem 'Share Tech Mono',monospace;color:#fff;text-shadow:0 1px 3px #000;transition:transform .2s;border:1px solid rgba(255,255,255,.08)}
+.sw:hover{transform:scale(1.07)}
+#paleta-enh{display:none}
+body:not(.enhanced) #paleta-enh{display:none!important}
+
+@media(max-width:600px){#btn-modo{left:50%;transform:translateX(-50%);bottom:auto;top:12px}body.enhanced .interfaz-principal{margin-top:40px}.tile b{font-size:1.3rem}}
+
+/* ===== TRANSICIÓN ENTRE VERSIONES ===== */
+#transicion{position:fixed;inset:0;z-index:100;pointer-events:none;display:none;place-items:center;clip-path:circle(0 at var(--x) var(--y))}
+#transicion.enhanced{background:radial-gradient(circle at 50% 100%,#6C663B,#2E3F42 45%,#03050d)}
+#transicion.retro{background:#03050d;background-image:repeating-linear-gradient(0deg,rgba(113,139,121,.08) 0 2px,transparent 2px 4px)}
+#transicion.in{display:grid;animation:iris 1.6s cubic-bezier(.7,0,.3,1) forwards}
+@keyframes iris{0%{clip-path:circle(0 at var(--x) var(--y))}42%,58%{clip-path:circle(150vmax at var(--x) var(--y))}100%{clip-path:circle(0 at var(--x) var(--y))}}
+#transicion span{font:1.3rem 'Share Tech Mono',monospace;letter-spacing:.4em;color:#B6AC6D;opacity:0;animation:txt 1.6s forwards}
+#transicion.retro span{color:var(--ojo-verde-claro)}
+@keyframes txt{0%,35%{opacity:0}48%,56%{opacity:1;letter-spacing:.6em}70%,100%{opacity:0}}
+
+/* ===== MÁS DIFERENCIA ===== */
+body.enhanced::before{content:'';position:fixed;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 125%,rgba(167,158,98,.3),transparent 60%),radial-gradient(ellipse at 50% 50%,transparent 45%,rgba(0,0,0,.55))}
+#luz{position:fixed;width:520px;height:520px;border-radius:50%;left:var(--mx,50%);top:var(--my,50%);transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(167,158,98,.13),transparent 65%);z-index:4;pointer-events:none;display:none}
+body.enhanced #luz{display:block}
+body.enhanced .interfaz-principal{animation:borde 8s ease-in-out infinite alternate;border-radius:26px}
+@keyframes borde{from{border-color:#4E6555}to{border-color:#A79E62;box-shadow:0 30px 70px rgba(0,0,0,.65),0 0 70px rgba(167,158,98,.2)}}
+.hero{font:italic 600 2.8rem 'Cormorant Garamond',serif;text-align:center;margin-bottom:8px;background:linear-gradient(90deg,#718B79,#B6AC6D,#718B79);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
+@keyframes shine{to{background-position:200% 0}}
+body.enhanced #seccion-principal>.parrafo-estetico{text-align:center}
+body.enhanced .firma-odyszea{text-align:center}
+body.enhanced .contenedor-botones-rincon{flex-direction:column;gap:10px}
+body.enhanced .contenedor-botones-rincon .btn-rincon{display:flex;justify-content:space-between;align-items:center;padding:15px 20px;font-size:.85rem;border-radius:14px;background:linear-gradient(90deg,rgba(113,139,121,.1),transparent)}
+body.enhanced .contenedor-botones-rincon .btn-rincon::after{content:attr(data-sub);font:italic 1rem 'Cormorant Garamond',serif;opacity:.75}
+body.enhanced .contenedor-botones-rincon .btn-rincon:hover{transform:translateX(6px)}
+body.enhanced #pantalla-inicio{background:radial-gradient(circle at 50% 115%,#4a5230,#03050d 65%)!important;flex-direction:column;gap:34px}
+body.enhanced #pantalla-inicio button{border-radius:999px;animation:pulso 2.4s ease-in-out infinite}
+@keyframes pulso{0%,100%{box-shadow:0 0 0 0 rgba(167,158,98,.4)}50%{box-shadow:0 0 0 18px rgba(167,158,98,0)}}
+.ini-titulo{font:italic 600 3.4rem 'Cormorant Garamond',serif;color:#B6AC6D;text-align:center;text-shadow:0 0 30px rgba(167,158,98,.4)}
+.ini-titulo small{display:block;font:.8rem 'Share Tech Mono',monospace;letter-spacing:6px;color:var(--ojo-verde-claro);margin-top:8px}
+body.enhanced .eq.enh-only{display:flex;gap:2px;align-items:flex-end;height:16px}
+.eq i{width:3px;height:100%;background:var(--ojo-verde-claro);transform-origin:bottom;animation:eq .9s ease-in-out infinite alternate}
+.eq i:nth-child(2){animation-delay:-.3s}.eq i:nth-child(3){animation-delay:-.6s}.eq i:nth-child(4){animation-delay:-.15s}
+body:not(.sonando) .eq i{animation-play-state:paused}
+@keyframes eq{from{transform:scaleY(.2)}to{transform:scaleY(1)}}
+
+/* ===== RINCÓN 3: Abrí cuando… ===== */
+#sobres{display:grid;gap:8px;margin:18px 0}
+.sobre{text-align:left}
+.sobre.abierto{opacity:.55}
+#carta-abierta{min-height:96px;margin-top:6px;font-size:1.15rem}
+#carta-abierta.on{padding:4px 2px}
+body.enhanced #sobres{grid-template-columns:1fr 1fr}
+body.enhanced .sobre{border-radius:12px;padding:14px 12px}
+body.enhanced #carta-abierta.on{background:rgba(255,255,255,.04);border:1px solid rgba(167,158,98,.35);border-radius:14px;padding:18px}
+@media(max-width:600px){body.enhanced #sobres{grid-template-columns:1fr}.hero{font-size:2.3rem}}
+
+/* ===================== VERSIÓN RETRO++ (terminal CRT fosforescente) ===================== */
+.ret-only{display:none}
+body:not(.enhanced) .ret-only{display:block}
+body:not(.enhanced){font-family:'Share Tech Mono',monospace;cursor:crosshair}
+body:not(.enhanced) *{text-shadow:0 0 6px rgba(113,139,121,.55)}
+body:not(.enhanced) .parrafo-estetico,body:not(.enhanced) .frase-secreta,body:not(.enhanced) .frase-revelacion{font-family:'Share Tech Mono',monospace!important;font-style:normal;font-size:.9rem;line-height:1.7}
+body:not(.enhanced) .frase-revelacion{font-size:1rem}
+body:not(.enhanced) #texto-frase-rincon{font-size:1.2rem!important}
+/* scanlines, viñeta y barrido */
+body:not(.enhanced)::after{content:'';position:fixed;inset:0;z-index:99999;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.3) 0 1px,transparent 1px 3px),radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,.75));animation:crt .12s steps(2) infinite}
+@keyframes crt{0%{opacity:.9}50%{opacity:1}100%{opacity:.94}}
+body:not(.enhanced)::before{content:'';position:fixed;left:0;right:0;top:-140px;height:140px;z-index:99998;pointer-events:none;background:linear-gradient(transparent,rgba(113,139,121,.09),transparent);animation:roll 7s linear infinite}
+@keyframes roll{to{transform:translateY(calc(100vh + 280px))}}
+/* fondo monocromo verde fósforo */
+body:not(.enhanced) .fondo-pantalla{filter:blur(3px) grayscale(1) sepia(.7) hue-rotate(75deg) brightness(.65) contrast(1.3);transform:none}
+body:not(.enhanced) .ondas-piscina-puras{opacity:.22}
+/* tarjeta como ventana de terminal */
+body:not(.enhanced) .interfaz-principal{border-radius:0;backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(2,9,7,.9);border:2px solid var(--ojo-verde-claro);box-shadow:0 0 0 4px #03050d,0 0 0 6px var(--ojo-verde-bosque),0 0 40px rgba(113,139,121,.25),inset 0 0 50px rgba(113,139,121,.08);animation:parp 5s infinite}
+@keyframes parp{0%,92%,100%{filter:none}93%{filter:brightness(1.35)}95%{filter:brightness(.8)}}
+body:not(.enhanced) .reproductor-mini{border-radius:0;backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(2,9,7,.9);border:1px dashed var(--ojo-verde-claro)}
+body:not(.enhanced) #mini-portada{border-radius:0;image-rendering:pixelated;filter:grayscale(1) sepia(1) hue-rotate(60deg) contrast(1.3)}
+body:not(.enhanced) .btn-skip{border-radius:0}
+/* detalles de consola */
+body:not(.enhanced) #seccion-principal>.parrafo-estetico::before{content:'> '}
+body:not(.enhanced) #seccion-principal>.parrafo-estetico::after{content:'█';margin-left:4px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+body:not(.enhanced) .titulo-rincon::before{content:'C:\\> '}
+body:not(.enhanced) .btn-rincon,body:not(.enhanced) .btn-rincon-colores{border-radius:0;transition:none}
+body:not(.enhanced) .btn-rincon::before{content:'[ ']}
+body:not(.enhanced) .btn-rincon::after{content:' ]'}
+body:not(.enhanced) .btn-rincon:hover,body:not(.enhanced) .btn-rincon-colores:hover{background:var(--ojo-verde-claro);color:#03050d;text-shadow:none;box-shadow:none}
+body:not(.enhanced) .separador-estetico{height:0;background:none;border-top:1px dashed var(--ojo-verde-claro);opacity:.5}
+body:not(.enhanced) #submenu-colores{border-radius:0;border-style:dashed}
+body:not(.enhanced) .micro-texto{opacity:1}
+/* arranque */
+body:not(.enhanced) #pantalla-inicio{flex-direction:column;gap:28px}
+body:not(.enhanced) #pantalla-inicio button{border-radius:0;font-size:1.2rem!important}
+.boot{font:.8rem/1.8 'Share Tech Mono',monospace;color:var(--ojo-verde-claro);width:min(90%,360px)}
+.boot span{display:block;white-space:nowrap;overflow:hidden;width:0;animation:tipea .8s steps(32) forwards}
+.boot span:nth-child(2){animation-delay:.8s}.boot span:nth-child(3){animation-delay:1.6s}.boot span:nth-child(4){animation-delay:2.4s}.boot span:nth-child(5){animation-delay:3.2s}
+@keyframes tipea{to{width:100%}}
