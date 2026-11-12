@@ -50,6 +50,7 @@
                 <button class="btn-rincon" onclick="cambiarSeccion('rincon1')">Rincón 1</button>
                 <button class="btn-rincon" onclick="cambiarSeccion('rincon2')">Rincón 2</button>
                 <button class="btn-rincon" onclick="cambiarSeccion('rincon3')">Rincón 3</button>
+                <button class="btn-rincon" onclick="cambiarSeccion('rincon4')">Rincón 4</button>
             </div>
 
             <hr class="separador-estetico">
@@ -121,6 +122,27 @@
         </div>
 
         <div id="seccion-rincon3" class="carta-contenido">
+            <div class="pl-head">
+                <div class="vinilo enh-only"></div>
+                <div>
+                    <h2 class="titulo-rincon">Playlist para vos</h2>
+                    <p class="pl-sub"><span id="pl-cuenta">40</span> temas · al tocar un tema, te explico el porqué</p>
+                </div>
+            </div>
+            <a class="btn-spotify" href="https://open.spotify.com/playlist/7oc9W3rdVSCJOt2cWoHFYh" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="currentColor"/><path d="M5.5 9c4.5-1.3 9-1 13 1.2M6.3 12.6c3.6-1 7-.7 10 1M7 15.8c2.8-.7 5.3-.5 7.6.9" stroke="#03050d" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+                Abrir en Spotify
+            </a>
+            <div class="pl-ctrl">
+                <input id="buscar-tema" type="search" placeholder="buscar tema o artista…" autocomplete="off">
+                <button class="btn-rincon" id="btn-azar-tema" title="un tema al azar">🎲</button>
+            </div>
+            <div id="lista-temas"></div>
+            <p id="pl-vacio" class="pl-vacio" hidden>no encontré ese tema…</p>
+            <button class="btn-volver" onclick="cambiarSeccion('principal')">← Volver al Principal</button>
+        </div>
+
+        <div id="seccion-rincon4" class="carta-contenido">
             <h2 class="titulo-rincon">Abrí cuando…</h2>
             <div id="sobres"></div>
             <div id="carta-abierta" class="parrafo-estetico"></div>
@@ -132,5 +154,6 @@
 
     <script src="interacciones_bocanada.js"></script>
     <script src="enhanced.js"></script>
+    <script src="playlist.js"></script>
 </body>
 </html>
