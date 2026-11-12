@@ -134,3 +134,46 @@ body:not(.enhanced) #pantalla-inicio button{border-radius:0;font-size:1.2rem!imp
 .boot span{display:block;white-space:nowrap;overflow:hidden;width:0;animation:tipea .8s steps(32) forwards}
 .boot span:nth-child(2){animation-delay:.8s}.boot span:nth-child(3){animation-delay:1.6s}.boot span:nth-child(4){animation-delay:2.4s}.boot span:nth-child(5){animation-delay:3.2s}
 @keyframes tipea{to{width:100%}}
+
+/* ===================== RINCÓN 3: PLAYLIST ===================== */
+.contenedor-botones-rincon{flex-wrap:wrap}
+.pl-head{display:flex;align-items:center;gap:14px;margin-bottom:4px}
+.pl-head .titulo-rincon{font-size:1.05rem;margin-bottom:6px}
+.pl-sub{font:.75rem/1.5 'Share Tech Mono',monospace;opacity:.85}
+.vinilo{flex:none;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle,#B6AC6D 0 11%,#03050d 12% 16%,transparent 17%),repeating-radial-gradient(circle,#0b1214 0 2px,#1d2d30 3px 4px);box-shadow:0 0 20px rgba(167,158,98,.3);animation:girar 7s linear infinite}
+.btn-spotify{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:10px;margin:16px 0 12px;padding:13px 16px;border:1px solid var(--ojo-verde-claro);border-radius:12px;color:var(--ojo-verde-claro);text-decoration:none;font:.8rem 'Share Tech Mono',monospace;letter-spacing:2px;text-transform:uppercase;background:rgba(255,255,255,.03);transition:.3s;-webkit-tap-highlight-color:transparent}
+.btn-spotify svg{flex:none}
+.btn-spotify:hover{color:#fff;border-color:#1DB954;box-shadow:0 0 24px rgba(29,185,84,.3)}
+body.enhanced .btn-spotify{border-radius:999px;border-color:rgba(29,185,84,.6);background:linear-gradient(90deg,rgba(29,185,84,.2),rgba(113,139,121,.1))}
+body.enhanced .btn-spotify::after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.2) 50%,transparent 65%);transform:translateX(-100%);animation:brilloSp 3.5s infinite}
+@keyframes brilloSp{to{transform:translateX(100%)}}
+body:not(.enhanced) .btn-spotify{border-radius:0;transition:none}
+body:not(.enhanced) .btn-spotify::before{content:'[ '}
+body:not(.enhanced) .btn-spotify::after{content:' ]'}
+body:not(.enhanced) .btn-spotify:hover{background:var(--ojo-verde-claro);color:#03050d;text-shadow:none;box-shadow:none}
+.pl-ctrl{display:flex;gap:8px;margin-bottom:10px}
+#buscar-tema{flex:1;min-width:0;background:rgba(255,255,255,.04);border:1px solid rgba(113,139,121,.4);color:var(--ojo-verde-claro);font:.8rem 'Share Tech Mono',monospace;padding:9px 12px;border-radius:10px;outline:none}
+#buscar-tema:focus{border-color:var(--ojo-verde-claro);box-shadow:0 0 10px rgba(113,139,121,.2)}
+#buscar-tema::placeholder{color:var(--ojo-verde-claro);opacity:.5}
+body:not(.enhanced) #buscar-tema{border-radius:0}
+#lista-temas{max-height:46vh;overflow-y:auto;padding-right:6px;scrollbar-width:thin;scrollbar-color:var(--ojo-verde-bosque) transparent;-webkit-overflow-scrolling:touch}
+.tema-cab{width:100%;display:flex;align-items:center;gap:12px;text-align:left;background:none;border:none;border-bottom:1px solid rgba(113,139,121,.18);color:var(--ojo-verde-claro);padding:11px 6px;cursor:pointer;font:inherit;outline:none;transition:background .2s;-webkit-tap-highlight-color:transparent}
+.tema-cab:hover,.item.abierto .tema-cab{background:rgba(113,139,121,.1)}
+.tema-n{flex:none;width:1.8em;font:.7rem 'Share Tech Mono',monospace;opacity:.6}
+.tema-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.tema-t b{font:600 1.05rem/1.2 'Cormorant Garamond',serif;color:#e4ece6}
+.tema-t small{font:.68rem 'Share Tech Mono',monospace;opacity:.75}
+.tema-cab::after{content:'+';font:1.1rem 'Share Tech Mono',monospace;opacity:.7;transition:transform .3s}
+.item.abierto .tema-cab::after{transform:rotate(45deg)}
+.tema-por{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.item.abierto .tema-por{grid-template-rows:1fr}
+.tema-por>div{overflow:hidden}
+.tema-por p{margin:8px 0 12px 2.6em;padding:4px 0 4px 12px;border-left:2px solid #A79E62;font:italic 1.12rem/1.5 'Cormorant Garamond',serif;color:var(--ojo-verde-claro)}
+.pl-vacio{text-align:center;padding:20px;font:.8rem 'Share Tech Mono',monospace;opacity:.7}
+body:not(.enhanced) .tema-t b{font:1rem 'Share Tech Mono',monospace}
+body:not(.enhanced) .tema-por{transition:none}
+body:not(.enhanced) .tema-por p{font:.85rem/1.6 'Share Tech Mono',monospace;font-style:normal;border-left:1px dashed var(--ojo-verde-claro)}
+body:not(.enhanced) .tema-por p::before{content:'> '}
+body.enhanced .item{border-radius:10px}
+body.enhanced .item.abierto{background:rgba(255,255,255,.03)}
+@media(max-width:600px){.vinilo{width:48px;height:48px}.tema-por p{margin-left:0}#lista-temas{max-height:44vh}}
